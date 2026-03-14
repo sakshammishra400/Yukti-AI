@@ -75,6 +75,26 @@ border-radius:6px;
 <input type="text" name="request" placeholder="Example: Passport Renewal">
 <button type="submit">Submit</button>
 </form>
+<form method="POST" enctype="multipart/form-data">
+
+<input type="file" name="aadhaar">
+
+<button type="submit">Upload Aadhaar</button>
+
+</form>
+{% if data %}
+
+<h3>Extracted Information</h3>
+
+<p>Name: {{ data.name }}</p>
+<p>Address: {{ data.address }}</p>
+
+{% endif %}
+{% if pdf %}
+
+<a href="{{ pdf }}">Download Completed Passport Form</a>
+
+{% endif %}
 
 {% if response %}
 
