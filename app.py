@@ -1,18 +1,17 @@
-import streamlit as st
-from agents import planner_agent, document_agent, form_agent
+from flask import Flask, render_template, request
+from govflow import run_agent
 
-st.title("Yukti AI")
-st.write("Government Service Assistant")
+app = Flask(__name__)
 
-service = st.text_input("What government service do you need?")
+@app.route("/", methods=["GET", "POST"])
+def index():
+    response = None
 
-if st.button("Analyze"):
+    if request.method == "POST":
+        user_request = request.form["request"]
+        response = run_agent(user_request)
 
-    st.subheader("Service Plan")
-    st.write(planner_agent(service))
+    return render_template("templates_index.html", response=response)
 
-    st.subheader("Required Documents")
-    st.write(document_agent(service))
-
-    st.subheader("Form Fields")
-    st.write(form_agent(service))
+if __name__ == "__main__":
+    app.run(debug=True)

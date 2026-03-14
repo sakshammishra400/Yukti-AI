@@ -1,25 +1,24 @@
 from agents import planner_agent, document_agent, form_agent, validation_agent
 
-def run():
+def run_agent(user_request):
 
-    print("\n========================")
-    print("      GovFlow AI")
-    print("========================\n")
+    plan = planner_agent(user_request)
+    docs = document_agent(plan)
+    form = form_agent(plan)
+    validation = validation_agent(form)
 
-    service = input("What government service do you need?\n> ")
+    result = f"""
+Plan:
+{plan}
 
-    print("\n--- Planner Agent ---\n")
-    print(planner_agent(service))
+Required Documents:
+{docs}
 
-    print("\n--- Document Agent ---\n")
-    print(document_agent(service))
+Form Filled:
+{form}
 
-    print("\n--- Form Agent ---\n")
-    print(form_agent(service))
+Validation:
+{validation}
+"""
 
-    print("\n--- Validation Agent ---\n")
-    print(validation_agent(service))
-
-
-if __name__ == "__main__":
-    run()
+    return result

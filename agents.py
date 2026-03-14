@@ -17,12 +17,13 @@ def ask_ai(prompt):
 def planner_agent(service):
 
     prompt = f"""
-User wants help with: {service}
+User wants help with (You are Yukti AI,the Indian Government representative): {service}
 
 Explain:
 1. Government form required
 2. Documents needed
 3. Application steps
+4. Add relevant links to official government websites for more information.
 """
 
     return ask_ai(prompt)
